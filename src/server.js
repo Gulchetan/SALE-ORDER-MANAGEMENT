@@ -1,23 +1,10 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+const jsonServer = require("json-server"); // importing json-server library
+const server = jsonServer.create();
+const router = jsonServer.router("db.json");
+const middlewares = jsonServer.defaults();
+const port = process.env.PORT || 8080; //  chose port from here like 8080, 3001
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+server.use(middlewares);
+server.use(router);
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-
-app.get('/api/data', (req, res) => {
-  const data = fs.readFileSync(path.join(__dirname, 'db.json'), 'utf8');
-  res.json(JSON.parse(data));
-});
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+server.listen(port);
