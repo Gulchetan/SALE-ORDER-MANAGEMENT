@@ -59,21 +59,35 @@
       "adding_date": "2024-05-24T12:46:41.995828Z"
     }
   ],
-  "activeSaleOrders": [   {
-    "id": "2",
-    "invoice_no": "INV002",
-    "invoice_date": "2024-05-20",
-    "customer_id": 11908,
-    "items": [
-      {
-        "sku_id": 102,
-        "price": 200,
-        "quantity": 1
-      }
-    ],
-    "paid": true
-  }],
+  "activeSaleOrders": [
+    {
+      "id": "bca3",
+      "items": [
+        {
+          "sku_id": "34",
+          "price": "500",
+          "quantity": "56"
+        }
+      ],
+      "customer_id": "12345",
+      "invoice_no": "INV2006",
+      "invoice_date": "2024-05-29"
+    }
+  ],
   "completedSaleOrders": [
-  
+    {
+      "id": "2",
+      "invoice_no": "INV0064",
+      "invoice_date": "2024-05-20",
+      "customer_id": "11907",
+      "items": [
+        {
+          "sku_id": 102,
+          "price": 200,
+          "quantity": 1
+        }
+      ],
+      "paid": true
+    }
   ]
 }
