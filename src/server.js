@@ -1,10 +1,27 @@
-const jsonServer = require("json-server"); // importing json-server library
-const server = jsonServer.create();
-const router = jsonServer.router("db.json");
-const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 8080; //  chose port from here like 8080, 3001
+const express = require('express');
+const path = require('path');
+const jsonServer = require('json-server');
 
-server.use(middlewares);
-server.use(router);
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-server.listen(port);
+// Setup JSON Server
+const jsonServerMiddleware = jsonServer.router('db.json');
+const middlewares = jsonServer.defaults({
+  static: 'build',  // This tells json-server to serve static files from React build directory
+});
+
+// Serve static files from React build directory
+app.use(express.static(path.join(__dirname, 'build')));
+
+// JSON Server middleware
+app.use('/api', middlewares, jsonServerMiddleware);
+
+// For any other requests, redirect to the index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
